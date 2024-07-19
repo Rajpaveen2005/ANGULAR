@@ -1,14 +1,33 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    SocialLoginModule
+  ],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              'YOUR_GOOGLE_CLIENT_ID'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppComponent 
-{
-  title = 'Camps';
-}
+export class AppModule { }
