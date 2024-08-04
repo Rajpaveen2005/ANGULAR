@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   user: SocialUser | undefined;
   loggedIn: boolean | undefined;
 
-  constructor(private _authService: SocialAuthService) { }
+  constructor(private authService: SocialAuthService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
